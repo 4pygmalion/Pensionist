@@ -1,17 +1,14 @@
 import os
-import sys
 import yaml
 import argparse
-import pandas as pd
 
 SDAM_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SDAM_DIR)
 LOG_DIR = os.path.join(ROOT_DIR, "log")
 RESULT_DIR = os.path.join(ROOT_DIR, "results")
-sys.path.append(ROOT_DIR)
 
 from utils import get_logger
-from SDAM.collector import DART
+from quant.collector import DART
 from annotator import Annotator
 from indicator import Indicator
 
@@ -44,7 +41,9 @@ if __name__ == "__main__":
     os.makedirs(RESULT_DIR, exist_ok=True)
 
     DART_API = DART(CONFIG, logger=LOGGER)
-    table = DART_API.create_table(["유동자산", "유동부채", "비유동자산", "비유동부채"], 2022, 1)
+    table = DART_API.create_table(
+        ["유동자산", "유동부채", "비유동자산", "비유동부채"], 2022, 1
+    )
     table.to_csv(os.path.join(RESULT_DIR, "finance_table.csv"))
 
     annotator = Annotator(LOGGER)

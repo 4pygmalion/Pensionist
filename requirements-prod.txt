@@ -1,0 +1,5 @@
+PyYAML==6.0.2
+pandas==2.2.3
+xmltodict==0.14.2
+requests
+bs4
